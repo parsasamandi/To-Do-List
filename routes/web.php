@@ -1,8 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\ProductController;
+use App\Http\Controllers\StudyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +14,12 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', [AdminController::class, 'show']);
-// Admin
-Route::group(['prefix' => 'admin', 'as' => 'admin.'], function() {
-  Route::get('list',  [AdminController::class, 'list']);
-  Route::get('table/list', [AdminController::class, 'adminTable'])->name('list.table');
-  Route::post('store', [AdminController::class, 'store']);
-  Route::get('edit', [AdminController::class, 'edit']);
-  Route::get('delete/{id}', [AdminController::class, 'delete']);
+Route::get('/', [StudyController::class, 'show']);
+// Study
+Route::group(['prefix' => 'study', 'as' => 'study.'], function() {
+  Route::get('list',  [StudyController::class, 'list']);
+  Route::get('table/list', [StudyController::class, 'studyTable'])->name('list.table');
+  Route::post('store', [StudyController::class, 'store']);
+  Route::get('edit', [StudyController::class, 'edit']);
+  Route::get('delete/{id}', [StudyController::class, 'delete']);
 });

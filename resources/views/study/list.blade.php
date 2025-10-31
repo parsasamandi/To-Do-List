@@ -1,39 +1,36 @@
 @extends('layouts.admin')
-@section('title','Management of admins')
+@section('title','Management of study to-do-list')
 
 @section('content')
-
-
   @include('includes.success')
 
   {{-- Header --}}
-  <x-header pageName="Admin" buttonValue="admin">
+  <x-header pageName="Study" buttonValue="study">
     <x-slot name="table">
-      <x-table :table="$adminTable" />
     </x-slot>
   </x-header>
 
    {{-- Insert --}}
-   <x-insert size="modal-l" formId="userForm">
+   <x-insert size="modal-l" formId="studyForm">
     <x-slot name="content">
       {{-- User form --}}
       <div class="row">
         {{-- Name --}}
         <x-input key="name" name="Name" class="col-md-12 mb-2" />
-        {{-- Email --}}
+        {{-- Tag --}}
         <x-input key="tag" name="Tag" class="col-md-12 mb-3" />
-        {{-- Phone number --}}
-        <x-input type="number" key="phone_number" name="Phone number" class="col-md-12 mb-3" />
+        {{-- Priority --}}
+        <x-input type="priority" key="phone_number" name="Phone number" class="col-md-12 mb-3" />
         {{-- Passwords --}}
         <div class="col-md-12 mb-3">
           <label for="password">Password:</label>
           <input type="password" name="password" id="password" class="form-control" 
-                    placeholder="Password" autocomplete="new-password">
+            placeholder="Password" autocomplete="new-password">
         </div>
         <div class="col-md-12">
           <label for="password-confirm">Password confirmaion:</label>
           <input type="password" name="password-confirm" id="password-confirm" class="form-control" 
-                    placeholder="Password confirmation" autocomplete="new-password">
+            placeholder="Password confirmation" autocomplete="new-password">
         </div>
       </div>
     </x-slot>
@@ -48,14 +45,13 @@
 @section('scripts')
   @parent
 
-  {{-- Admin Table --}}
-  {!! $adminTable->scripts() !!}
+  {{-- Study Table --}}
 
   <script>
     $(document).ready(function () {
-      // Admin DataTable And Action Object
-      let dt = window.LaravelDataTables['adminTable'];
-      let action = new RequestHandler(dt,'#adminForm', 'admin');
+      // Study DataTable And Action Object
+      let dt = window.LaravelDataTables['studyTable'];
+      let action = new RequestHandler(dt,'#studyForm', 'study');
 
       // Record modal
       $('#create_record').click(function () {
@@ -77,7 +73,7 @@
         action.reloadModal();
 
         $.ajax({
-          url: "{{ url('admin/edit') }}",
+          url: "{{ url('study/edit') }}",
           method: "get",
           data: {id: $id},
           success: function(data) {

@@ -4,47 +4,42 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use App\Http\Controllers\UserController;
-use App\DataTables\AdminDataTable;
-use App\Http\Requests\StoreUserRequest;
+use App\DataTables\StudyDataTable;
+use App\Http\Requests\StoreStudyRequest;
 use App\Providers\Action;
-use App\Models\User;
+use App\Models\ToDoList;
 
-class AdminController extends Controller
+class StudyController extends Controller
 {
     public $action;
 
     public function __construct() {
         $this->action = new Action();
     }
-    
-    // Admin page
+
     public function show() {
-        return view('admin.home');
+        return view("study.list");
     }
 
     // DataTable to blade
     public function list() {
 
-        $dataTable = new AdminDataTable();
+        $dataTable = new StudyDataTable();
 
-        // User Table
-        $vars['adminTable'] = $dataTable->html();
+        $vars['studyTable'] = $dataTable->html();
  
-        return view('admin.list', $vars);
+        return view('study.list', $vars);
     }
 
-    // Get user
-    public function adminTable(AdminDataTable $dataTable) {
-        return $dataTable->render('admin.list');
+    public function studyTable(StudyDataTable $dataTable) {
+        return $dataTable->render('study.list');
     }
 
-    // Store user
-    public function store(StoreUserRequest $request) {
+    public function store(StoreStudyRequest $request) {
         // Id
         $id = $request->get('id');
 
-        User::updateOrCreate(
+        ToDoList::updateOrCreate(
             ['id' => $id],
             ['name' => $request->get('name'),'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
@@ -56,11 +51,11 @@ class AdminController extends Controller
     
     // Edit 
     public function edit(Request $request) {
-        return $this->action->edit(User::class, $request->get('id'));
+        return $this->action->edit(ToDoList::class, $request->get('id'));
     }
     
     // Delete
     public function delete($id) {
-        return $this->action->delete(User::class, $id);
+        return $this->action->delete(ToDoList::class, $id);
     }
 }

@@ -2,13 +2,13 @@
 
 namespace App\DataTables;
 
-use App\Models\User;
+use App\Models\Study;
 use App\Datatables\GeneralDataTable;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Support\Facades\URL;
 
-class AdminDataTable extends DataTable
+class StudyDataTable extends DataTable
 {
     public $dataTable;
 
@@ -37,7 +37,7 @@ class AdminDataTable extends DataTable
     /**
      * Get query source of dataTable.
      *
-     * @param App\Models\Admin $model
+     * @param App\Models\ToDoList $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function query(User $model)
@@ -53,7 +53,7 @@ class AdminDataTable extends DataTable
     public function html()
     {
         return $this->dataTable->tableSetting($this->builder(), 
-                $this->getColumns(), 'admin');
+                $this->getColumns(), 'study');
     }
     
 

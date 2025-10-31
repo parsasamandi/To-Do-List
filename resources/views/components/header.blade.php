@@ -1,9 +1,6 @@
 <div class="container-fluid">
     {{-- List --}}
-    <h2>{{ $pageName }} list</h2>
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item">{{ $pageName }} page</li>
-    </ol>
+    <h2>{{ $pageName }} List</h2>
 
     {{-- Button --}}
     @if($buttonValue != null)
