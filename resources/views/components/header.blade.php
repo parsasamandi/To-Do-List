@@ -7,10 +7,6 @@
         <!-- Create button -->
         <button type="button" id="create_record"
             class="btn btn-primary btn-sm">Create {{ $buttonValue }}</button>
-
-        <!-- Excel file -->
-        <button type="button" id="export_btn"
-            class="btn btn-primary btn-sm">Export Table</button>
         <hr>
     @endif
     
