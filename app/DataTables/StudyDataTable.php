@@ -2,11 +2,10 @@
 
 namespace App\DataTables;
 
-use App\Models\Study;
+use App\Models\Task;
 use App\Datatables\GeneralDataTable;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
-use Illuminate\Support\Facades\URL;
 
 class StudyDataTable extends DataTable
 {
@@ -24,23 +23,22 @@ class StudyDataTable extends DataTable
      */
     public function dataTable($query)
     {
-        return datatables() 
+        return datatables()
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action'])
-            ->addColumn('action', function (User $user){
-                return $this->dataTable->setAction($user->id);
+            ->addColumn('action', function (Task $task) {
+                return $this->dataTable->setAction($task->id);
             });
     }
     
-
     /**
      * Get query source of dataTable.
      *
-     * @param App\Models\ToDoList $model
+     * @param Task $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(User $model)
+    public function query(Task $model)
     {
         return $model->newQuery();
     }
@@ -52,11 +50,13 @@ class StudyDataTable extends DataTable
      */
     public function html()
     {
-        return $this->dataTable->tableSetting($this->builder(), 
-                $this->getColumns(), 'study');
+        return $this->dataTable->tableSetting(
+            $this->builder(), 
+            $this->getColumns(), 
+            'study'
+        );
     }
     
-
     /**
      * Get columns.
      *
@@ -66,19 +66,12 @@ class StudyDataTable extends DataTable
     {
         return [
             $this->dataTable->getIndexCol(),
-            Column::make('name')
-            ->title('Name'),
-            Column::make('tag')
-            ->title('Tag'),
-            Column::make('priority')
-            ->title('Priority'),
-            Column::make('due_date')
-            ->title('Due date'),
-            Column::make('status')
-            ->title('Status'),
+            Column::make('name')->title('Name'),
+            Column::make('tag')->title('Tag'),
+            Column::make('priority')->title('Priority'),
+            Column::make('due_date')->title('Due date'),
+            Column::make('status')->title('Status'),
             $this->dataTable->setActionCol('| Edit')
         ];
     }
 }
-
-

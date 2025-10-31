@@ -38,7 +38,7 @@
                         <div class="nav">
                             {{-- Admin --}}
                             <div class="sb-sidenav-menu-heading">User</div>
-                            <x-url text="Study" fontAwesome="fa fa-user" route="{{ url('admin/list') }}" />
+                            <x-url text="Study" fontAwesome="fa fa-user" route="{{ url('study/list') }}" />
                         </div>
                     </div>
                 </nav>

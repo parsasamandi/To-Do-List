@@ -8,18 +8,23 @@ use App\Http\Controllers\StudyController;
 | Web Routes
 |--------------------------------------------------------------------------
 |
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| Here is where you can register web routes for your application.
 |
 */
 
-Route::get('/', [StudyController::class, 'show']);
-// Study
-Route::group(['prefix' => 'study', 'as' => 'study.'], function() {
-  Route::get('list',  [StudyController::class, 'list']);
+// Homepage — show study list
+Route::get('/', [StudyController::class, 'list']);
+
+// Study CRUD routes
+Route::prefix('study')->name('study.')->group(function () {
+  // Blade page with DataTable
+  Route::get('list', [StudyController::class, 'list'])->name('list');
+  // DataTable AJAX endpoint
   Route::get('table/list', [StudyController::class, 'studyTable'])->name('list.table');
-  Route::post('store', [StudyController::class, 'store']);
-  Route::get('edit', [StudyController::class, 'edit']);
-  Route::get('delete/{id}', [StudyController::class, 'delete']);
+  // Store or update a task
+  Route::post('store', [StudyController::class, 'store'])->name('store');
+  // Edit task
+  Route::get('edit/{id}', [StudyController::class, 'edit'])->name('edit');
+  // Delete task
+  Route::delete('delete/{id}', [StudyController::class, 'delete'])->name('delete');
 });

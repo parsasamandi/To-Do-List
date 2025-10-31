@@ -7,84 +7,97 @@
   {{-- Header --}}
   <x-header pageName="Study" buttonValue="study">
     <x-slot name="table">
+      <x-table :table="$studyTable" />
     </x-slot>
   </x-header>
 
-   {{-- Insert --}}
-   <x-insert size="modal-l" formId="studyForm">
+  {{-- Insert / Update Modal --}}
+  <x-insert size="modal-l" formId="studyForm">
     <x-slot name="content">
-      {{-- User form --}}
       <div class="row">
         {{-- Name --}}
         <x-input key="name" name="Name" class="col-md-12 mb-2" />
+
         {{-- Tag --}}
-        <x-input key="tag" name="Tag" class="col-md-12 mb-3" />
+        <x-input key="tag" name="Tag" class="col-md-12 mb-2" />
+
         {{-- Priority --}}
-        <x-input type="priority" key="phone_number" name="Phone number" class="col-md-12 mb-3" />
-        {{-- Passwords --}}
-        <div class="col-md-12 mb-3">
-          <label for="password">Password:</label>
-          <input type="password" name="password" id="password" class="form-control" 
-            placeholder="Password" autocomplete="new-password">
+        <div class="col-md-12 mb-2">
+          <label for="priority">Priority</label>
+          <select name="priority" id="priority" class="form-control">
+            <option value="0">Low</option>
+            <option value="1" selected>Medium</option>
+            <option value="2">High</option>
+          </select>
         </div>
-        <div class="col-md-12">
-          <label for="password-confirm">Password confirmaion:</label>
-          <input type="password" name="password-confirm" id="password-confirm" class="form-control" 
-            placeholder="Password confirmation" autocomplete="new-password">
+
+        {{-- Status --}}
+        <div class="col-md-12 mb-2">
+          <label for="status">Status</label>
+          <select name="status" id="status" class="form-control">
+            <option value="0" selected>Pending</option>
+            <option value="1">In Progress</option>
+            <option value="2">Completed</option>
+          </select>
         </div>
+
+        {{-- Due Date --}}
+        <x-input key="due_date" name="Due Date" class="col-md-12 mb-2" />
       </div>
     </x-slot>
   </x-insert>
 
   {{-- Delete --}}
-  <x-delete title="product"/>
-
+  <x-delete title="task"/>
 @endsection
-
 
 @section('scripts')
   @parent
 
   {{-- Study Table --}}
+  {!! $studyTable->scripts() !!}
 
   <script>
     $(document).ready(function () {
-      // Study DataTable And Action Object
+      // Study DataTable and Action Object
       let dt = window.LaravelDataTables['studyTable'];
-      let action = new RequestHandler(dt,'#studyForm', 'study');
+      let action = new RequestHandler(dt, '#studyForm', 'study');
 
-      // Record modal
+      // Open modal for new task
       $('#create_record').click(function () {
         action.openInsertionModal();
       });
 
-      // Insert
+      // Insert / Update
       action.insert();
 
       // Delete
       window.showConfirmationModal = function showConfirmationModal(url) {
         action.delete(url);
       }
+
       // Edit
       window.showEditModal = function showEditModal(id) {
         edit(id);
       }
-      function edit($id) {
+
+      function edit(id) {
         action.reloadModal();
 
         $.ajax({
           url: "{{ url('study/edit') }}",
           method: "get",
-          data: {id: $id},
+          data: {id: id},
           success: function(data) {
-            action.editOnSuccess($id);
-            $('#name').val($id);
-            $('#email').val(data.email);
-            $('#phone_number').val(data.phone_number);
-            $('#password').val('NewPassword');
-            $('#password-confirm').val('NewPassword');
+            action.editOnSuccess(id);
+
+            $('#name').val(data.name);
+            $('#tag').val(data.tag);
+            $('#priority').val(data.priority);
+            $('#status').val(data.status);
+            $('#due_date').val(data.due_date);
           }
-        })
+        });
       }
     });
   </script>
