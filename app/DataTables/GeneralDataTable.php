@@ -68,13 +68,31 @@ class GeneralDataTable
     }   
 
     // Computed column in datatables for delete,update and details
-    public function setAction($id) {
+public function setAction($id, $model = null)
+{
+    // Base action buttons using JS functions (AJAX)
+    $baseHtml = <<<HTML
+        <a href="javascript:void(0);" onclick="showConfirmationModal({$id})">
+            <i class="fa fa-trash text-primary" aria-hidden="true"></i>
+        </a>
+        &nbsp;
+        <a href="javascript:void(0);" onclick="showEditModal({$id})">
+            <i class="fa fa-edit text-primary" aria-hidden="true"></i>
+        </a>
+    HTML;
 
-        return $this->setDelAction($id) . "&nbsp;
-                <a onclick='showEditModal({$id})'>
-                    <i class='fa fa-edit text-danger'></i>
-                </a>";
+    // Optional details link (still plain link)
+    if ($model) {
+        $detailsUrl = url($model . '/details') . '?id=' . $id;
+        $baseHtml .= "&nbsp;<a href='{$detailsUrl}'>
+            <i class='fa fa-info-circle text-primary' aria-hidden='true'></i>
+        </a>";
     }
+
+    return $baseHtml;
+}
+
+
 
     // Computed column in datatables for delete and details
     public function setDelDetAction($id, $details) {
@@ -82,13 +100,7 @@ class GeneralDataTable
         return $this->setDelAction($id) . $this->setDetAction($details);
     }
     
-    // Computed column in datatables for delete
-    public function setDelAction($id) {
 
-        return "<a onclick='showConfirmationModal({$id})'>
-                    <i class='fa fa-trash text-danger'></i>
-                </a>";
-    }
 
     // Computed column in datatables for edit
     public function setEditAction($id) {

@@ -24,7 +24,7 @@ Route::prefix('study')->name('study.')->group(function () {
   // Store or update a task
   Route::post('store', [StudyController::class, 'store'])->name('store');
   // Edit task
-  Route::get('edit/{id}', [StudyController::class, 'edit'])->name('edit');
+  Route::get('edit', [StudyController::class, 'edit'])->name('edit');
   // Delete task
-  Route::delete('delete/{id}', [StudyController::class, 'delete'])->name('delete');
+  Route::get('delete/{id}', [StudyController::class, 'delete'])->name('delete');
 });

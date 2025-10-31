@@ -53,22 +53,27 @@ class RequestHandler {
 
     // Delete
     delete(id) {
-        $('#confirmationModal').modal('show'); // Confirm
+        $('#confirmationModal').modal('show'); // Show confirm modal
 
-        $('#ok_button').click(function () {
+        $('#confirmation_button').off('click').on('click', function () { // Remove previous click handlers
             $.ajax({
-                url: "/" + window.url + "/delete",
-                method: "get",
-                data: { id: id },
-                success: function(data) {
-                    success(data, "#confirmationModal");
+                url: "/" + window.url + "/delete/" + id, // DELETE URL with ID
+                method: "get", // Use DELETE method
+                data: {
+                    _token: $('meta[name="csrf-token"]').attr('content') // Include CSRF token
                 },
-                error: function (data) {
+                success: function(data) {
+                    $('#confirmationModal').modal('hide');
+                    $('#success').modal('show');
+                    window.dt.draw(false); // Refresh DataTable
+                },
+                error: function(data) {
                     error(data);
                 }
-            })
+            });
         });
     }
+
 
     // Default edit data
     reloadModal() {

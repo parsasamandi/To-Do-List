@@ -3,6 +3,7 @@
     @section('stylesheet')
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
@@ -11,7 +12,6 @@
         <link href="{{ asset('css/admin.css') }}" rel="stylesheet" />
         {{-- Mix App --}}
         <link href="{{ mix('css/app.css') }}" rel="stylesheet">
-        
     @show       
 
     <body class="sb-nav-fixed">
@@ -65,6 +65,11 @@
         </div>
         
         @section('scripts')
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
             {{-- App Script --}}
             <script src="{{ mix('js/app.js') }}"></script>
             {{-- Ajax Requests --}}
