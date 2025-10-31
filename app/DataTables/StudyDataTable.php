@@ -27,9 +27,26 @@ class StudyDataTable extends DataTable
             ->eloquent($query)
             ->addIndexColumn()
             ->rawColumns(['action'])
+            ->addColumn('priority', function (Task $task) {
+                $labels = [
+                    0 => 'Low',
+                    1 => 'Medium',
+                    2 => 'High'
+                ];
+                return $labels[$task->priority] ?? 'Unknown';
+            })
+            ->addColumn('status', function (Task $task) {
+                $labels = [
+                    0 => 'Pending',
+                    1 => 'In Progress',
+                    2 => 'Completed'
+                ];
+                return $labels[$task->status] ?? 'Unknown';
+            })
             ->addColumn('action', function (Task $task) {
                 return $this->dataTable->setAction($task->id);
             });
+
     }
     
     /**
