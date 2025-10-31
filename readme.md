@@ -1,16 +1,6 @@
-<img width="1279" alt="laravelAdminCMS" src="https://user-images.githubusercontent.com/59174137/178458312-5d225c97-577c-4910-a0cd-1dc8aa6d7ba2.png">
-
 ## About this
 
-I have worked hard to make CRUD much easier and optimized every single line of code to look simpler and more comfortable. 
-Use and enjoy.
-
-- Simple
-- Fast
-- Optimized
-- Nice user interface
-
-This project is accessible, powerful, and provides an easy tool to CRUD.
+A to-do-list for User Interface Design (CMPT 2276).
 
 ## License
 
