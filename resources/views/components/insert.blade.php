@@ -10,7 +10,7 @@
         <form id="{{ $formId ?? null }}" class="form-horizontal" enctype="multipart/form-data">
           @csrf
           
-          <span id="form_output"></span>
+          <span class="form_output"></span>
 
           {{ $content ?? null }}
           <br />
