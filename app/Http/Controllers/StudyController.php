@@ -50,7 +50,7 @@ class StudyController extends Controller
         );
 
         // Call the action based on button_action
-        return $this->getAction($request->get('button_action'));
+        return $this->getAction($request->get('action'));
     }
     
     // Edit task

@@ -5,7 +5,7 @@
   @include('includes.success')
 
   {{-- Header --}}
-  <x-header pageName="Study" buttonValue="study">
+  <x-header pageName="To Do" buttonValue="A Task">
     <x-slot name="table">
       <x-table :table="$studyTable" />
     </x-slot>
@@ -90,7 +90,6 @@
           data: {id: id},
           success: function(data) {
             action.editOnSuccess(id);
-
             $('#name').val(data.name);
             $('#tag').val(data.tag);
             $('#priority').val(data.priority);
