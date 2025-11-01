@@ -68,31 +68,29 @@ class GeneralDataTable
     }   
 
     // Computed column in datatables for delete,update and details
-public function setAction($id, $model = null)
-{
-    // Base action buttons using JS functions (AJAX)
-    $baseHtml = <<<HTML
-        <a href="javascript:void(0);" onclick="showConfirmationModal({$id})">
-            <i class="fa fa-trash text-primary" aria-hidden="true"></i>
-        </a>
-        &nbsp;
-        <a href="javascript:void(0);" onclick="showEditModal({$id})">
-            <i class="fa fa-edit text-primary" aria-hidden="true"></i>
-        </a>
-    HTML;
+    public function setAction($id, $model = null)
+    {
+        // Base action buttons using JS functions (AJAX)
+        $baseHtml = <<<HTML
+            <a href="javascript:void(0);" onclick="showConfirmationModal({$id})">
+                <i class="fa fa-trash text-primary" aria-hidden="true"></i>
+            </a>
+            &nbsp;
+            <a href="javascript:void(0);" onclick="showEditModal({$id})">
+                <i class="fa fa-edit text-primary" aria-hidden="true"></i>
+            </a>
+        HTML;
 
-    // Optional details link (still plain link)
-    if ($model) {
-        $detailsUrl = url($model . '/details') . '?id=' . $id;
-        $baseHtml .= "&nbsp;<a href='{$detailsUrl}'>
-            <i class='fa fa-info-circle text-primary' aria-hidden='true'></i>
-        </a>";
+        // Optional details link (still plain link)
+        if ($model) {
+            $detailsUrl = url($model . '/details') . '?id=' . $id;
+            $baseHtml .= "&nbsp;<a href='{$detailsUrl}'>
+                <i class='fa fa-info-circle text-primary' aria-hidden='true'></i>
+            </a>";
+        }
+
+        return $baseHtml;
     }
-
-    return $baseHtml;
-}
-
-
 
     // Computed column in datatables for delete and details
     public function setDelDetAction($id, $details) {

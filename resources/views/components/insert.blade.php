@@ -18,8 +18,8 @@
           {{-- Buttons --}}
           <div class="form-group text-center">
             <input type="hidden" name="id" id="id" value="" />
-            <input type="hidden" name="button_action" id="button_action" value="insert" />
-            <input type="submit" name="action" id="action" class="btn btn-success" value="Submit" />
+            <input type="submit" name="button_action" id="button_action" class="btn btn-success" value="insert" />
+            <input type="hidden" name="action" id="action" class="btn btn-success" />
             <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
           </div>
         </form>
