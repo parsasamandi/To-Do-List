@@ -73,11 +73,11 @@ class GeneralDataTable
         // Base action buttons using JS functions (AJAX)
         $baseHtml = <<<HTML
             <a href="javascript:void(0);" onclick="showConfirmationModal({$id})">
-                <i class="fa fa-trash text-primary" aria-hidden="true"></i>
+                <i class="fa fa-trash btn btn-danger"  aria-hidden="true"></i>
             </a>
             &nbsp;
             <a href="javascript:void(0);" onclick="showEditModal({$id})">
-                <i class="fa fa-edit text-primary" aria-hidden="true"></i>
+                <i class="fa fa-edit btn btn-success" aria-hidden="true"></i>
             </a>
         HTML;
 
@@ -85,7 +85,7 @@ class GeneralDataTable
         if ($model) {
             $detailsUrl = url($model . '/details') . '?id=' . $id;
             $baseHtml .= "&nbsp;<a href='{$detailsUrl}'>
-                <i class='fa fa-info-circle text-primary' aria-hidden='true'></i>
+                <i class='fa fa-info-circle text-primary' style='color: red' aria-hidden='true'></i>
             </a>";
         }
 

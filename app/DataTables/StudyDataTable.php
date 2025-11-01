@@ -33,7 +33,7 @@ class StudyDataTable extends DataTable
                     1 => 'Medium',
                     2 => 'High'
                 ];
-                return $labels[$task->priority] ?? 'Unknown';
+                return $labels[$task->priority];
             })
             ->addColumn('status', function (Task $task) {
                 $labels = [
@@ -41,7 +41,7 @@ class StudyDataTable extends DataTable
                     1 => 'In Progress',
                     2 => 'Completed'
                 ];
-                return $labels[$task->status] ?? 'Unknown';
+                return $labels[$task->status];
             })
             ->addColumn('action', function (Task $task) {
                 return $this->dataTable->setAction($task->id);
