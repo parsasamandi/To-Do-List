@@ -83,11 +83,11 @@ class StudyDataTable extends DataTable
     {
         return [
             $this->dataTable->getIndexCol(),
-            Column::make('name')->title('Name'),
+            Column::make('name')->title('Name')->orderable(false)->searcable(true),
             Column::make('tag')->title('Tag'),
             Column::make('priority')->title('Priority'),
-            Column::make('due_date')->title('Due date'),
-            Column::make('status')->title('Status'),
+            Column::make('due_date')->title('Due date')->orderable(false),
+            Column::make('status')->title('Status')->orderable(true),
             $this->dataTable->setActionCol('| Edit')
         ];
     }

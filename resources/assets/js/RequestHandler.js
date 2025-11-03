@@ -14,7 +14,7 @@ class RequestHandler {
         // Show the insertion/update modal
         showFormModal();
         // Set the button action for insertion
-        $('#button_action').val('insert');
+        $('#button_action').val('Insert');
         // Set the button value to 'insert'
         $('#action').val('insert');
         // Set the sign * as 'required'
@@ -23,7 +23,7 @@ class RequestHandler {
         $('select').val(null).trigger('change');
         // Reset the dataTable
         $(window.formId)[0].reset();
-        window.dt.cear().draw();
+        // window.dt.cear().draw();
     }
 
     // Insertion
@@ -75,6 +75,7 @@ class RequestHandler {
     }
 
 
+
     // Default edit data
     reloadModal() {
         // Empty the form output
@@ -87,9 +88,9 @@ class RequestHandler {
     editOnSuccess(id) {
         $('#id').val(id);
         // Set the button action for update
-        $('#button_action').val('update');
+        $('#button_action').val('Update');
         // Set the button value to 'update'
-        $('#action').val('Update');
+        $('#action').val('update');
         // Remove "required field" from heading
         $('.required-heading .input-required').hide();
     }
