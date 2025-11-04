@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudyController;
+use App\Http\Controllers\PersonalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,3 +29,13 @@ Route::prefix('study')->name('study.')->group(function () {
   // Delete task
   Route::get('delete/{id}', [StudyController::class, 'delete'])->name('delete');
 });
+
+Route::prefix('personal')->name('personal.')->group(function () {
+  Route::get('/list', [PersonalController::class, 'list'])->name('list');
+  Route::get('/table', [PersonalController::class, 'personalTable'])->name('list.table');
+  Route::post('/store', [PersonalController::class, 'store'])->name('store');
+  Route::get('/edit', [PersonalController::class, 'edit'])->name('edit');
+  Route::get('/delete/{id}', [PersonalController::class, 'delete'])->name('delete');
+});
+
+

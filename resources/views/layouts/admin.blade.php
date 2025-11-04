@@ -35,9 +35,12 @@
                 <nav class="sb-sidenav accordion sb-sidenav-light" id="sidenavAccordion">
                     <div class="sb-sidenav-menu">
                         <div class="nav">
-                            {{-- Admin --}}
+                            {{-- Study --}}
                             <div class="sb-sidenav-menu-heading">Workspace 1</div>
-                            <x-url text="To-do-list" fontAwesome="fa fa-user" route="{{ url('study/list') }}" />
+                            <x-url text="Study" fontAwesome="fa fa-user" route="{{ url('study/list') }}" />
+                             {{-- Personal --}}
+                            <div class="sb-sidenav-menu-heading">Workspace 2</div>
+                            <x-url text="Personal" fontAwesome="fa fa-user" route="{{ url('personal/list') }}" />
                         </div>
                     </div>
                 </nav>

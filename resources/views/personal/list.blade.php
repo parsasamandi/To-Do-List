@@ -1,18 +1,18 @@
 @extends('layouts.admin')
-@section('title','Management of study to-do-list')
+@section('title','Management of personal to-do-list')
 
 @section('content')
   @include('includes.success')
 
   {{-- Header --}}
-  <x-header pageName="Study To Do" buttonValue="A Task">
+  <x-header pageName="Personal To Do" buttonValue="A Task">
     <x-slot name="table">
-      <x-table :table="$studyTable" />
+      <x-table :table="$personalTable" />
     </x-slot>
   </x-header>
 
   {{-- Insert / Update Modal --}}
-  <x-insert size="modal-l" formId="studyForm">
+  <x-insert size="modal-l" formId="personalForm">
     <x-slot name="content">
       <div class="row">
         {{-- Name --}}
@@ -51,14 +51,14 @@
 @section('scripts')
   @parent
 
-  {{-- Study Table --}}
-  {!! $studyTable->scripts() !!}
+  {{-- Personal Table --}}
+  {!! $personalTable->scripts() !!}
 
   <script>
     $(document).ready(function () {
-      // Study DataTable and Action Object
-      let dt = window.LaravelDataTables['studyTable'];
-      let action = new RequestHandler(dt, '#studyForm', 'study');
+      // Personal DataTable and Action Object
+      let dt = window.LaravelDataTables['personalTable'];
+      let action = new RequestHandler(dt, '#personalForm', 'personal');
 
       // Open modal for new task
       $('#create_record').click(function () {
@@ -82,13 +82,12 @@
         action.reloadModal();
 
         $.ajax({
-          url: "{{ url('study/edit') }}",
+          url: "{{ url('personal/edit') }}",
           method: "get",
-          data: {id: id},
+          data: { id: id },
           success: function(data) {
             action.editOnSuccess(id);
             $('#name').val(data.name);
-            $('#tag').val(data.tag);
             $('#priority').val(data.priority);
             $('#status').val(data.status);
             $('#due_date').val(data.due_date);

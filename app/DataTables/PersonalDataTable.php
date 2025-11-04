@@ -7,14 +7,14 @@ use App\Datatables\GeneralDataTable;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Services\DataTable;
 
-class StudyDataTable extends DataTable
+class PersonalDataTable extends DataTable
 {
     public $dataTable;
 
     public function __construct() {
         $this->dataTable = new GeneralDataTable();
     }
-    
+
     /**
      * Build DataTable class.
      *
@@ -34,7 +34,7 @@ class StudyDataTable extends DataTable
                     2 => 'High'
                 ];
                 return $labels[$task->priority];
-            }) 
+            })
             ->orderColumn('priority', function ($query, $order) {
                 $query->orderBy('priority', $order);
             })
@@ -45,15 +45,15 @@ class StudyDataTable extends DataTable
                     2 => 'Completed'
                 ];
                 return $labels[$task->status];
-            })->orderColumn('status', function ($query, $order) {
+            })
+            ->orderColumn('status', function ($query, $order) {
                 $query->orderBy('status', $order);
             })
             ->addColumn('action', function (Task $task) {
                 return $this->dataTable->setAction($task->id);
             });
-
     }
-    
+
     /**
      * Get query source of dataTable.
      *
@@ -62,7 +62,8 @@ class StudyDataTable extends DataTable
      */
     public function query(Task $model)
     {
-        return $model->newQuery()->where('tag', 'study');
+        // Fetch only "personal" tasks
+        return $model->newQuery()->where('tag', 'personal');
     }
 
     /**
@@ -73,12 +74,12 @@ class StudyDataTable extends DataTable
     public function html()
     {
         return $this->dataTable->tableSetting(
-            $this->builder(), 
-            $this->getColumns(), 
-            'study'
+            $this->builder(),
+            $this->getColumns(),
+            'personal'
         );
     }
-    
+
     /**
      * Get columns.
      *
@@ -88,12 +89,12 @@ class StudyDataTable extends DataTable
     {
         return [
             $this->dataTable->getIndexCol(),
-            Column::make('name')->title('Name')->orderable(false)->searcable(true),
+            Column::make('name')->title('Name')->orderable(false)->searchable(true),
             Column::make('tag')->title('Tag')->orderable(false),
             Column::make('priority')->title('Priority'),
-            Column::make('due_date')->title('Due date')->orderable(false),
+            Column::make('due_date')->title('Due Date')->orderable(false),
             Column::make('status')->title('Status')->orderable(true),
-            $this->dataTable->setActionCol('| Edit')
+            $this->dataTable->setActionCol('| Edit'),
         ];
     }
 }
