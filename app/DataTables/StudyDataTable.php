@@ -34,6 +34,9 @@ class StudyDataTable extends DataTable
                     2 => 'High'
                 ];
                 return $labels[$task->priority];
+            }) 
+            ->orderColumn('priority', function ($query, $order) {
+                $query->orderBy('priority', $order);
             })
             ->addColumn('status', function (Task $task) {
                 $labels = [
@@ -42,6 +45,8 @@ class StudyDataTable extends DataTable
                     2 => 'Completed'
                 ];
                 return $labels[$task->status];
+            })->orderColumn('status', function ($query, $order) {
+                $query->orderBy('status', $order);
             })
             ->addColumn('action', function (Task $task) {
                 return $this->dataTable->setAction($task->id);
@@ -84,7 +89,7 @@ class StudyDataTable extends DataTable
         return [
             $this->dataTable->getIndexCol(),
             Column::make('name')->title('Name')->orderable(false)->searcable(true),
-            Column::make('tag')->title('Tag'),
+            Column::make('tag')->title('Tag')->orderable(false),
             Column::make('priority')->title('Priority'),
             Column::make('due_date')->title('Due date')->orderable(false),
             Column::make('status')->title('Status')->orderable(true),
