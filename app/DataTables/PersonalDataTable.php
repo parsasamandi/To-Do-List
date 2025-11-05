@@ -90,7 +90,6 @@ class PersonalDataTable extends DataTable
         return [
             $this->dataTable->getIndexCol(),
             Column::make('name')->title('Name')->orderable(false)->searchable(true),
-            Column::make('tag')->title('Tag')->orderable(false),
             Column::make('priority')->title('Priority'),
             Column::make('due_date')->title('Due Date')->orderable(false),
             Column::make('status')->title('Status')->orderable(true),
