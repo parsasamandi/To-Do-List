@@ -18,6 +18,9 @@
         {{-- Name --}}
         <x-input key="name" name="Name" class="col-md-12 mb-2" />
 
+        {{-- Type --}}
+        <x-input key="sub_tag" name="Type" class="col-md-12 mb-2" />
+
         {{-- Priority --}}
         <div class="col-md-12 mb-2">
           <label for="priority">Priority</label>

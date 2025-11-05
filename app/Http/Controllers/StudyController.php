@@ -43,6 +43,7 @@ class StudyController extends Controller
             [
                 'name' => $request->get('name'),
                 'tag' => "study",
+                'sub_tag' => $request->get('sub_tag'),
                 'priority' => $request->get('priority', 1),
                 'status' => $request->get('status', 0),
                 'due_date' => $request->get('due_date'),

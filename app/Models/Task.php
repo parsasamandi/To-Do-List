@@ -20,5 +20,6 @@ class Task extends Model
         'priority',   // corresponds to the 'priority' column
         'status',     // corresponds to the 'status' column
         'due_date',   // corresponds to the 'due_date' column
+        'sub_tag',   // corresponds to the 'sub_tag' column
     ];
 }

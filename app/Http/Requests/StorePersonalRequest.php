@@ -16,6 +16,7 @@ class StorePersonalRequest extends FormRequest
         return [
             'name'      => 'required|string|max:255',
             'priority'  => 'required|integer|in:0,1,2',
+            'sub_tag'  => 'required',
             'status'    => 'required|integer|in:0,1,2',
             'due_date'  => 'required|string|max:255',
         ];
