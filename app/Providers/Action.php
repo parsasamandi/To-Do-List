@@ -37,7 +37,6 @@ class Action {
         } catch (Throwable $e) {
             return response()->json($e);
         }
-
     }
 
 }

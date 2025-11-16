@@ -91,6 +91,7 @@
           success: function(data) {
             action.editOnSuccess(id);
             $('#name').val(data.name);
+            $('#sub_tag').val(data.sub_tag);
             $('#priority').val(data.priority);
             $('#status').val(data.status);
             $('#due_date').val(data.due_date);
